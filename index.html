@@ -1,0 +1,246 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+        <script src="https://rawgit.com/furf/jquery-ui-touch-punch/master/jquery.ui.touch-punch.min.js" integrity="sha256-AAhU14J4Gv8bFupUUcHaPQfvrdNauRHMt+S4UVcaJb0=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js" integrity="sha256-tcGmeTaNpTfnsPaICAGrMv6Es4uQCs28H9vozWqGxMg=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mathjs@8.0.1/lib/browser/math.js" integrity="sha256-drG736mE4yA5sgVV9BQ337Ajw3GUz2UD141K7HRC0Fs=" crossorigin="anonymous"></script>
+    </head>
+    <body style="background: black;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-3">
+                </div>
+                <div class="col-xl-6 text-center">
+                    <canvas id="canvas" width="600" height="600"></canvas>
+                </div>
+                <div class="col-xl-3">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="dataset-addon">Dataset</span>
+                        </div>
+                        <select id="dataset" type="text" class="form-control deprecator" aria-describedby="dataset-addon">
+                            <option value="males.txt">Males</option>
+                            <option value="females.txt">Females</option>
+                            <option value="bisex.txt">Bisex</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="curve-addon">Curve</span>
+                        </div>
+                        <input id="curve" type="text" class="form-control deprecator" aria-describedby="curve-addon" value="(x^2 + y^2 - 1)^3 - x^2 * y^3 < 0">
+                    </div>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="minx-addon">Min x</span>
+                        </div>
+                        <input id="minx" type="text" class="form-control deprecator" aria-describedby="minx-addon" value="-1.5">
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="maxx-addon">Max x</span>
+                        </div>
+                        <input id="maxx" type="text" class="form-control deprecator" aria-describedby="maxx-addon" value="1.5">
+                    </div>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="miny-addon">Min y</span>
+                        </div>
+                        <input id="miny" type="text" class="form-control deprecator" aria-describedby="miny-addon" value="-1.4">
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="maxy-addon">Max y</span>
+                        </div>
+                        <input id="maxy" type="text" class="form-control deprecator" aria-describedby="maxy-addon" value="1.6">
+                    </div>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="h-addon">h</span>
+                        </div>
+                        <input id="h" type="text" class="form-control deprecator" aria-describedby="h-addon" value="0.02">
+                    </div>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="p-addon">p</span>
+                        </div>
+                        <input id="p" type="text" class="form-control deprecator" aria-describedby="p-addon" value="2137">
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="q-addon">q</span>
+                        </div>
+                        <input id="q" type="text" class="form-control deprecator" aria-describedby="q-addon" value="43">
+                    </div>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="r-addon">r</span>
+                        </div>
+                        <input id="r" type="text" class="form-control deprecator" aria-describedby="r-addon" value="314159">
+                    </div>
+
+                    <button id="apply-button" type="button" class="btn btn-primary">Apply</button>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        let canvas = undefined;
+        let context = undefined;
+
+        let curve = undefined;
+        let dataset = undefined;
+
+        let minx = undefined;
+        let maxx = undefined;
+        let miny = undefined;
+        let maxy = undefined;
+
+        let width = undefined;
+        let height = undefined;
+
+        let h = undefined;
+        let p = undefined;
+        let q = undefined;
+        let r = undefined;
+
+        function getCurrentCurve() {
+            const definition = $("#curve").val();
+            const evaluator = math.compile(definition);
+
+            return (x, y) => evaluator.evaluate({x: x, y: y});
+        }
+
+        function getCurrentDataset() {
+            const name = $("#dataset").val();
+            return getDataset(name);
+        }
+
+        function getDataset(name) {
+            const data = $.ajax({
+                type: "GET",
+                url: name,
+                async: false
+            }).responseText;
+            return data.split("\n").filter(Boolean);
+        }
+
+        function placeMarker(i, j) {
+            context.fillStyle = "rgba(255,255,255,1)";
+            context.fillRect(i, j - 10, 1, 21);
+            context.fillRect(i - 10, j, 21, 1);
+        }
+
+        function getName(x, y) {
+            let realx = Math.round(x / h);
+            let realy = Math.round(y / h);
+
+            let index = ((realx * p + realy * q + r) % dataset.length + dataset.length) % dataset.length;
+            return dataset[index];
+        }
+
+        function notifyName(x, y) {
+            let name = getName(x, y);
+            curve = (x, y) => false;
+
+            context.fillStyle = "rgba(0,0,0,0.3)";
+            context.fillRect(0, 0, canvas.width, canvas.height);
+
+            context.font = "50px Arial"
+            context.fillStyle = "rgba(255,255,255,0.7)";
+
+            let textMetrics = context.measureText(name);
+            context.fillText(name, width / 2 - textMetrics.width / 2, height / 2);
+        }
+
+        function selectPlace(i, j) {
+            let x = getX(i);
+            let y = getY(j);
+
+            if (curve(x, y)) {
+                placeMarker(i, j);
+                notifyName(x, y);
+            }
+        }
+
+        function getX(i) {
+            return (i / width) * (maxx - minx) + minx;
+        }
+
+        function getY(j) {
+            return (1 - (j / height)) * (maxy - miny) + miny;
+        }
+
+        function updateConfig() {
+            width = canvas.width;
+            height = canvas.height;
+
+            curve = getCurrentCurve();
+            dataset = getCurrentDataset();
+
+            minx = parseFloat($("#minx").val());
+            maxx = parseFloat($("#maxx").val());
+
+            miny = parseFloat($("#miny").val());
+            maxy = parseFloat($("#maxy").val());
+
+            h = parseFloat($("#h").val());
+            p = parseFloat($("#p").val());
+            q = parseFloat($("#q").val());
+            r = parseFloat($("#r").val());
+
+            for (let j = 0; j < height; ++j) {
+                const y = getY(j);
+
+                for (let i = 0; i < width; ++i) {
+                    const x = getX(i);
+
+                    if (curve(x, y)) {
+                        context.fillStyle = "rgba(255,0,0,1)";
+                    } else {
+                        context.fillStyle = "rgba(0,0,0,1)";
+                    }
+
+                    context.fillRect(i, j, 1, 1);
+                }
+            }
+        }
+
+        function deprecateConfig() {
+            curve = (x, y) => false;
+
+            context.fillStyle = "rgba(0,0,0,1)";
+            context.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
+        $(function() {
+            canvas = document.getElementById("canvas");
+            context = canvas.getContext("2d");
+
+            canvas.addEventListener('click', function(event) {
+                selectPlace(event.offsetX - 1, event.offsetY);
+            });
+
+            deprecateConfig();
+
+            $("#apply-button").on("click", updateConfig);
+            $(".deprecator").on("change", deprecateConfig);
+
+            $(document).on("keyup",function(event) {
+                if (event.key.toLowerCase() === "d") {
+                    dataset = getDataset("dziunia.txt");
+                }
+            });
+        });
+    </script>
+</html>
