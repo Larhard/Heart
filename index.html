@@ -130,6 +130,7 @@
             const data = $.ajax({
                 type: "GET",
                 url: name,
+                cache: false,
                 async: false
             }).responseText;
             return data.split("\n").filter(Boolean);
