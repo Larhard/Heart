@@ -142,10 +142,20 @@
         }
 
         function getName(x, y) {
-            let realx = Math.round(x / h);
-            let realy = Math.round(y / h);
+            let realx = Math.round(x / h) + minx;
+            let realy = Math.round(y / h) + miny;
 
-            let index = ((realx * p + realy * q + r) % dataset.length + dataset.length) % dataset.length;
+            let magicBase = (Math.sin(realx * p) + Math.cos(realy * q)) * r
+            let magicNumber = magicBase - Math.floor(magicBase);
+            console.log(realx);
+            console.log(realy);
+            console.log(magicNumber);
+
+            let index = Math.floor(magicNumber * dataset.length)
+
+            if (index == dataset.length) {
+                return "Nobody";
+            }
             return dataset[index];
         }
 
