@@ -89,6 +89,13 @@
                         <input id="r" type="text" class="form-control deprecator" aria-describedby="r-addon" value="314159">
                     </div>
 
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="s-addon">s</span>
+                        </div>
+                        <input id="s" type="text" class="form-control deprecator" aria-describedby="s-addon" value="127">
+                    </div>
+
                     <button id="apply-button" type="button" class="btn btn-primary">Apply</button>
                 </div>
             </div>
@@ -113,6 +120,7 @@
         let p = undefined;
         let q = undefined;
         let r = undefined;
+        let s = undefined;
 
         function getCurrentCurve() {
             const definition = $("#curve").val();
@@ -143,14 +151,11 @@
         }
 
         function getName(x, y) {
-            let realx = Math.round(x / h) + minx;
-            let realy = Math.round(y / h) + miny;
+            let realx = Math.round(x / h);
+            let realy = Math.round(y / h);
 
-            let magicBase = (Math.sin(realx * p) + Math.cos(realy * q)) * r
+            let magicBase = (Math.sin(realx * p + realy * q + s)) * r
             let magicNumber = magicBase - Math.floor(magicBase);
-            console.log(realx);
-            console.log(realy);
-            console.log(magicNumber);
 
             let index = Math.floor(magicNumber * dataset.length)
 
@@ -209,6 +214,7 @@
             p = parseFloat($("#p").val());
             q = parseFloat($("#q").val());
             r = parseFloat($("#r").val());
+            s = parseFloat($("#s").val());
 
             for (let j = 0; j < height; ++j) {
                 const y = getY(j);
